@@ -1,240 +1,670 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Sudaraka Senevirathne - Associate Technical Lead and Full Stack Developer. Expert in Java, Spring Boot, Angular, Next.js, and Cloud Architectures.">
-    <meta name="keywords" content="Sudaraka Senevirathne, Full Stack Developer, Java, Spring Boot, Angular, Next.js, MongoDB, PostgreSQL, AWS, Sri Lanka">
-    <meta name="author" content="Sudaraka Senevirathne">
-    
-    <title>Sudaraka.online | Associate Technical Lead</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Sudaraka Senevirathne - Tech Lead. Terminal Mode."
+    />
+    <title>Sudaraka@Dev: ~</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        dark: '#020617', 
-                        card: '#0f172a',
-                        primary: '#6366f1', 
-                        accent: '#a855f7', 
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                        'blob': 'blob 10s infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-12px)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ['"Fira Code"', "monospace"],
+            },
+            colors: {
+              terminal: {
+                bg: "var(--bg-color)",
+                text: "var(--text-color)",
+                dim: "var(--dim-color)",
+                accent: "var(--accent-color)",
+                border: "var(--border-color)",
+              },
+            },
+            animation: {
+              blink: "blink 1s step-end infinite",
+              scanline: "scanline 8s linear infinite",
+              shimmer: "shimmer 2s infinite linear",
+            },
+            keyframes: {
+              blink: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0" },
+              },
+              scanline: {
+                "0%": { transform: "translateY(-100%)" },
+                "100%": { transform: "translateY(100%)" },
+              },
+              shimmer: {
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(100%)" },
+              },
+            },
+          },
+        },
+      };
     </script>
 
     <style>
-        /* Background Grid */
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
-        .light .bg-grid {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-        }
-        
-        /* Glow Effect with Blob Animation */
-        .glow-bg {
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.1) 40%, transparent 70%);
-        }
+      :root {
+        --bg-color: #050505;
+        --text-color: #00ff41;
+        --dim-color: #003b00;
+        --accent-color: #008f11;
+        --border-color: #003b00;
+        --json-key: #00ff41;
+        --json-string: #ffffff;
+      }
 
-        /* Icon Styles */
-        .tech-icon-container {
-            transition: transform 0.3s ease;
-        }
-        
-        .tech-icon {
-            filter: grayscale(100%) opacity(0.7);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+      [data-theme="cyberpunk"] {
+        --bg-color: #0d0221;
+        --text-color: #00ff9f;
+        --dim-color: #2de2e6;
+        --accent-color: #f6019d;
+        --border-color: #f6019d;
+        --json-key: #00ff9f;
+        --json-string: #f6019d;
+      }
 
-        /* Hover: Color + Scale + Pulse */
-        .tech-icon-container:hover .tech-icon {
-            filter: grayscale(0%) opacity(1);
-            transform: scale(1.15); 
-        }
+      [data-theme="monokai"] {
+        --bg-color: #272822;
+        --text-color: #a6e22e;
+        --dim-color: #75715e;
+        --accent-color: #f92672;
+        --border-color: #49483e;
+        --json-key: #66d9ef;
+        --json-string: #e6db74;
+      }
+
+      [data-theme="ubuntu"] {
+        --bg-color: #300a24;
+        --text-color: #ffffff;
+        --dim-color: #aea79f;
+        --accent-color: #e95420;
+        --border-color: #5e2750;
+        --json-key: #e95420;
+        --json-string: #ffffff;
+      }
+
+      [data-theme="nord"] {
+        --bg-color: #2e3440;
+        --text-color: #88c0d0;
+        --dim-color: #4c566a;
+        --accent-color: #ebcb8b;
+        --border-color: #434c5e;
+        --json-key: #81a1c1;
+        --json-string: #a3be8c;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Fira Code", monospace;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      #canvas-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .crt-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.1) 50%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.03),
+            rgba(0, 255, 0, 0.01),
+            rgba(0, 0, 255, 0.03)
+          );
+        background-size: 100% 4px, 3px 100%;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .crt-scan {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 255, 65, 0.02) 50%,
+          transparent
+        );
+        z-index: 101;
+        pointer-events: none;
+        animation: scanline 10s linear infinite;
+      }
+
+      .terminal-window {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        transition: border-color 0.3s ease;
+      }
+
+      .prompt::before {
+        content: "$ ";
+        color: var(--text-color);
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 1.2em;
+        background: var(--text-color);
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+      }
+
+      .tech-icon {
+        filter: grayscale(100%) opacity(0.7);
+        transition: all 0.3s ease;
+      }
+
+      .tech-icon:hover {
+        filter: none;
+        transform: scale(1.2) rotate(5deg);
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-color);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+      }
+
+      .theme-btn {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.2s ease;
+      }
+      .theme-btn:hover {
+        transform: scale(1.3);
+      }
+
+      .json-key {
+        color: var(--json-key);
+      }
+      .json-string {
+        color: var(--json-string);
+      }
+      .json-punc {
+        opacity: 0.6;
+      }
+
+      /* Pixelation Container */
+      .profile-frame {
+        position: relative;
+        border: 1px solid var(--border-color);
+        background: #000;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #pixel-canvas {
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+        display: block;
+      }
+
+      .decoding-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: opacity 0.5s ease;
+      }
+
+      .decoding-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
     </style>
-</head>
-<body class="bg-slate-50 text-slate-900 dark:bg-dark dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden">
+  </head>
+  <body class="selection:bg-terminal-accent selection:text-white">
+    <div id="canvas-container"></div>
+    <div class="crt-overlay"></div>
+    <div class="crt-scan"></div>
 
-    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
-    
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] glow-bg z-0 pointer-events-none blur-3xl animate-blob"></div>
+    <main
+      class="relative z-10 max-w-5xl mx-auto p-4 md:p-10 min-h-screen flex flex-col gap-8"
+    >
+      <header
+        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-terminal-border pb-4"
+      >
+        <div class="flex items-center gap-4">
+          <i data-lucide="terminal" class="w-8 h-8 text-terminal-accent"></i>
+          <div>
+            <div class="text-[10px] opacity-50 uppercase tracking-widest">
+              Sudaraka_Senevirathne.v2
+            </div>
+            <div class="text-lg font-bold flex items-center gap-2">
+              SUDARAKA@LOCAL: ~
+            </div>
+          </div>
+        </div>
 
-    <nav class="w-full z-50 px-6 py-6 flex justify-between items-center max-w-6xl mx-auto relative">
-        <a href="#" class="text-xl font-bold tracking-tight flex items-center gap-2">
-            <span class="text-primary">Sudaraka</span>.online
-        </a>
+        <div class="flex flex-col md:items-end gap-2">
+          <div
+            class="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-full border border-terminal-border"
+          >
+            <span class="text-[10px] uppercase mr-2 opacity-60">Themes:</span>
+            <button
+              onclick="setTheme('matrix')"
+              class="theme-btn bg-[#00ff41]"
+              title="matrix"
+            ></button>
+            <button
+              onclick="setTheme('cyberpunk')"
+              class="theme-btn bg-[#f6019d]"
+              title="Cyberpunk"
+            ></button>
+            <button
+              onclick="setTheme('monokai')"
+              class="theme-btn bg-[#a6e22e]"
+              title="Monokai"
+            ></button>
+            <button
+              onclick="setTheme('ubuntu')"
+              class="theme-btn bg-[#e95420]"
+              title="Ubuntu"
+            ></button>
+            <button
+              onclick="setTheme('nord')"
+              class="theme-btn bg-[#88c0d0]"
+              title="Nord"
+            ></button>
+          </div>
+          <div class="text-right text-[10px] opacity-60 font-mono">
+            <span id="time-display">00:00:00</span> | UP:
+            <span id="uptime">0h 0m 0s</span>
+          </div>
+        </div>
+      </header>
 
-        <!-- <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
-            <a href="#" class="hover:text-primary transition-colors">Home</a>
-            <a href="#projects" class="hover:text-primary transition-colors">Projects</a>
-            <a href="mailto:sudarakase@gmail.com" class="hover:text-primary transition-colors">Contact</a>
-        </div> -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-6">
+          <div class="terminal-window rounded p-6">
+            <div
+              class="flex items-center gap-2 mb-4 border-b border-terminal-border pb-2 opacity-70"
+            >
+              <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+              <span class="ml-2 text-[10px] uppercase font-bold"
+                >whoami.sh</span
+              >
+            </div>
 
-        <button id="theme-toggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-            <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
-            <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
-        </button>
-    </nav>
+            <div class="space-y-4">
+              <div class="prompt text-terminal-accent">cat profile.json</div>
+              <pre
+                class="whitespace-pre-wrap text-sm md:text-base leading-relaxed"
+              >
+<span class="json-punc">{</span>
+  <span class="json-key">"name"</span><span class="json-punc">:</span> <span class="json-string">"Sudaraka Senevirathne"</span><span class="json-punc">,</span>
+  <span class="json-key">"role"</span><span class="json-punc">:</span> <span class="json-string">"Associate Technical Lead"</span><span class="json-punc">,</span>
+  <span class="json-key">"specialization"</span><span class="json-punc">:</span> <span class="json-string">"Full Stack / Architecture"</span><span class="json-punc">,</span>
+  <span class="json-key">"bio"</span><span class="json-punc">:</span> <span class="json-string">"I architect and build scalable, high-performance systems. Expert in navigating complex landscapes and leading agile development teams to deliver robust enterprise solutions."</span>
+<span class="json-punc">}</span></pre>
+              <div class="prompt text-terminal-accent">status --check</div>
+              <div
+                class="flex items-center gap-3 bg-terminal-accent/10 p-3 border border-terminal-accent/30 rounded"
+              >
+                <span class="relative flex h-3 w-3">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-text opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-3 w-3 bg-terminal-text"
+                  ></span>
+                </span>
+                <span class="text-sm font-medium"
+                  >SYSTEMS ONLINE: Available for freelancing, contact me
+                  now.</span
+                >
+              </div>
+            </div>
+          </div>
 
-    <main class="flex-grow flex flex-col items-center justify-center text-center px-4 z-10 pt-6 pb-20 relative">
-        
-        <div class="animate-fade-in flex flex-col items-center gap-6 max-w-3xl mx-auto">
-            
-            <div class="relative w-32 h-32 md:w-40 md:h-40 animate-float">
-                <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent rounded-full blur-xl opacity-50 animate-pulse"></div>
-                <img src="image/sudaraka.png" alt="Avatar" class="relative w-full h-full rounded-full border-4 border-slate-100 dark:border-slate-800 shadow-2xl bg-slate-800">
-                
-                <div class="absolute bottom-2 right-2 flex h-4 w-4">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-slate-900"></span>
+          <div class="terminal-window rounded p-6">
+            <div
+              class="flex items-center gap-2 mb-4 border-b border-terminal-border pb-2 opacity-70"
+            >
+              <span class="ml-2 text-[10px] uppercase font-bold"
+                >ls -F ./bin/tech</span
+              >
+            </div>
+            <div class="grid grid-cols-4 md:grid-cols-6 gap-8 py-4">
+              <i
+                class="devicon-java-plain colored text-4xl tech-icon"
+                title="Java"
+              ></i>
+              <i
+                class="devicon-spring-original colored text-4xl tech-icon"
+                title="Spring Boot"
+              ></i>
+              <i
+                class="devicon-angularjs-plain colored text-4xl tech-icon"
+                title="Angular"
+              ></i>
+              <i
+                class="devicon-typescript-plain colored text-4xl tech-icon"
+                title="TypeScript"
+              ></i>
+              <i
+                class="devicon-nextjs-plain text-terminal-text text-4xl tech-icon"
+                title="Next.js"
+              ></i>
+              <i
+                class="devicon-mongodb-plain colored text-4xl tech-icon"
+                title="MongoDB"
+              ></i>
+              <i
+                class="devicon-postgresql-plain colored text-4xl tech-icon"
+                title="PostgreSQL"
+              ></i>
+              <i
+                class="devicon-amazonwebservices-plain-wordmark colored text-4xl tech-icon"
+                title="AWS"
+              ></i>
+              <i
+                class="devicon-docker-plain colored text-4xl tech-icon"
+                title="Docker"
+              ></i>
+              <i
+                class="devicon-kubernetes-plain colored text-4xl tech-icon"
+                title="K8s"
+              ></i>
+              <i
+                class="devicon-nodejs-plain colored text-4xl tech-icon"
+                title="Node.js"
+              ></i>
+              <i
+                class="devicon-linux-plain text-terminal-text text-4xl tech-icon"
+                title="Linux"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="terminal-window rounded p-6 overflow-hidden">
+            <div
+              class="profile-frame w-full aspect-square mb-6 rounded border border-terminal-border group"
+            >
+              <div id="decoding-overlay" class="decoding-overlay">
+                <span class="text-[10px] animate-pulse">DECODING...</span>
+                <div
+                  class="w-1/2 h-0.5 bg-terminal-border mt-2 relative overflow-hidden"
+                >
+                  <div
+                    class="absolute inset-0 bg-terminal-text animate-shimmer"
+                  ></div>
                 </div>
+              </div>
+              <canvas id="pixel-canvas"></canvas>
+              <div
+                class="absolute bottom-2 right-2 text-[8px] opacity-40 uppercase font-mono z-20"
+              >
+                ENCODED_ID_094
+              </div>
             </div>
 
-            <div class="space-y-2">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-                    Hey, I'm Sudaraka <span class="inline-block animate-bounce" style="animation-duration: 2s;"><i class="devicon-vscode-plain colored"></i></span>
-                </h1>
-                <h2 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-blue-500 pb-2">
-                    Associate Technical Lead
-                </h2>
-            </div>
-
-            <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-base md:text-lg leading-relaxed">
-                A <b>Full Stack Engineer</b> with solid foundations in system architecture. 
-                Passionate about building scalable cloud-based applications using <span class="text-slate-900 dark:text-white font-medium">Java, Spring Boot, & Angular</span>. 
-            </p>
-
-            <div class="flex flex-col md:flex-row items-center gap-4 mt-4">
-                <a href="mailto:sudarakase@gmail.com" class="group flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full font-semibold hover:opacity-90 transition-all shadow-lg shadow-primary/20 hover:scale-105 active:scale-95">
-                    <i data-lucide="mail" class="w-4 h-4"></i>
-                    <span>Contact Me</span>
+            <div class="space-y-4 text-sm">
+              <div class="prompt text-terminal-accent">cat contacts.lnk</div>
+              <div class="space-y-3">
+                <a
+                  href="mailto:sudarakase@gmail.com"
+                  class="flex items-center gap-3 hover:text-terminal-accent transition-colors group"
+                >
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                  <span>sudarakase@gmail.com</span>
                 </a>
-                <div class="flex gap-4 text-slate-500 dark:text-slate-400 px-4">
-                    <a href="https://github.com/sudarakas" target="_blank" class="hover:text-slate-900 dark:hover:text-white transition-colors hover:scale-110 transform duration-200">
-                        <i data-lucide="github" class="w-6 h-6"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/sudarakas" target="_blank" class="hover:text-[#0077b5] transition-colors hover:scale-110 transform duration-200">
-                        <i data-lucide="linkedin" class="w-6 h-6"></i>
-                    </a>
-                </div>
+                <a
+                  href="https://github.com/sudarakas"
+                  target="_blank"
+                  class="flex items-center gap-3 hover:text-terminal-accent transition-colors group"
+                >
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                  <span>github.com/sudarakas</span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/sudarakas"
+                  target="_blank"
+                  class="flex items-center gap-3 hover:text-terminal-accent transition-colors group"
+                >
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                  <span>linkedin.com/in/sudarakas</span>
+                </a>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <div class="mt-20 w-full max-w-6xl mx-auto">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8 opacity-60">My Tech Arsenal</p>
-            
-            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-                
-                <div class="tech-icon-container animate-float" style="animation-delay: 0s;">
-                    <i class="devicon-java-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Java"></i>
-                </div>
-                
-                <div class="tech-icon-container animate-float" style="animation-delay: 1.5s;">
-                    <i class="devicon-spring-original colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Spring Boot"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 0.5s;">
-                    <i class="devicon-angularjs-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Angular"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 2s;">
-                    <i class="devicon-typescript-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="TypeScript"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 1s;">
-                    <i class="devicon-nextjs-plain text-slate-800 dark:text-white text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Next.js"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 2.5s;">
-                    <i class="devicon-mongodb-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="MongoDB"></i>
-                </div>
-
-                 <div class="tech-icon-container animate-float" style="animation-delay: 0.2s;">
-                    <i class="devicon-postgresql-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="PostgreSQL"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 1.8s;">
-                    <i class="devicon-amazonwebservices-plain-wordmark colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="AWS"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 0.8s;">
-                    <i class="devicon-docker-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Docker"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 2.2s;">
-                    <i class="devicon-nodejs-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Node.js"></i>
-                </div>
-
-                <div class="tech-icon-container animate-float" style="animation-delay: 1.2s;">
-                    <i class="devicon-linux-plain text-slate-800 dark:text-slate-200 text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Linux"></i>
-                </div>
-                
-                 <div class="tech-icon-container animate-float" style="animation-delay: 2.8s;">
-                    <i class="devicon-git-plain colored text-3xl md:text-5xl tech-icon hover:animate-pulse" title="Git"></i>
-                </div>
-
+          <div
+            class="terminal-window rounded p-4 text-[10px] space-y-2 opacity-60"
+          >
+            <div class="flex justify-between font-mono">
+              <span>KERNEL:</span><span>5.15.0-generic</span>
             </div>
+            <div class="flex justify-between font-mono">
+              <span>SHELL:</span><span>zsh 5.8</span>
+            </div>
+            <div class="flex justify-between font-mono">
+              <span>LOC:</span><span>SRI LANKA (LK)</span>
+            </div>
+            <div
+              class="mt-4 text-center border-t border-terminal-border pt-2 italic"
+            >
+              "Architecting the invisible."
+            </div>
+          </div>
         </div>
+      </div>
 
+      <footer class="mt-auto pt-10 text-center opacity-40 text-xs font-mono">
+        [SESSION_ID: <span id="session-id"></span>] --
+        <span class="cursor"></span>
+      </footer>
     </main>
 
     <script>
-        lucide.createIcons();
+      let scene, camera, renderer, cloud;
 
-        // Theme Toggle Logic
-        const toggleBtn = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
+      lucide.createIcons();
+
+      document.getElementById("session-id").textContent = Math.random()
+        .toString(36)
+        .substring(2, 10)
+        .toUpperCase();
+
+      const startTime = Date.now();
+      setInterval(() => {
+        const now = Date.now();
+        const diff = Math.floor((now - startTime) / 1000);
+        const h = Math.floor(diff / 3600);
+        const m = Math.floor((diff % 3600) / 60);
+        const s = diff % 60;
+        document.getElementById("uptime").textContent = `${h}h ${m}m ${s}s`;
+
+        const time = new Date();
+        document.getElementById("time-display").textContent =
+          time.toLocaleTimeString();
+      }, 1000);
+
+      // --- Pixelation Engine ---
+      function pixelate(img) {
+        const canvas = document.getElementById("pixel-canvas");
+        const ctx = canvas.getContext("2d");
+        const overlay = document.getElementById("decoding-overlay");
+
+        // Set internal resolution low for pixel effect
+        const size = 64;
+        canvas.width = size;
+        canvas.height = size;
+
+        // Draw low res
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(img, 0, 0, size, size);
+
+        // Apply slight color tint based on current theme
+        const style = getComputedStyle(document.documentElement);
+        const color = style.getPropertyValue("--text-color").trim();
+        ctx.globalCompositeOperation = "multiply";
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.1;
+        ctx.fillRect(0, 0, size, size);
+
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+        }, 800);
+      }
+
+      const profileImg = new Image();
+      profileImg.src = "image/sudaraka.png";
+      profileImg.onload = () => pixelate(profileImg);
+      profileImg.onerror = () => {
+        // Fallback to placeholder if file is missing
+        const fallback = new Image();
+        fallback.src =
+          "https://api.dicebear.com/7.x/pixel-art/svg?seed=Sudaraka&backgroundColor=000000";
+        fallback.onload = () => pixelate(fallback);
+      };
+
+      function setTheme(themeName) {
+        document.documentElement.setAttribute("data-theme", themeName);
+        localStorage.setItem("terminal-theme", themeName);
+
+        const style = getComputedStyle(document.documentElement);
+        const accentColor = style.getPropertyValue("--text-color").trim();
+        if (cloud && cloud.material) {
+          cloud.material.color.set(accentColor);
+        }
+        // Re-pixelate on theme change to update tint
+        if (profileImg.complete) pixelate(profileImg);
+      }
+
+      const savedTheme = localStorage.getItem("terminal-theme") || "monokai";
+      setTheme(savedTheme);
+
+      const initThree = () => {
+        const container = document.getElementById("canvas-container");
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          1,
+          1000
+        );
+        camera.position.z = 400;
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const count = 3500;
+
+        for (let i = 0; i < count; i++) {
+          vertices.push(
+            Math.random() * 2000 - 1000,
+            Math.random() * 2000 - 1000,
+            Math.random() * 2000 - 1000
+          );
         }
 
-        toggleBtn.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+        geometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(vertices, 3)
+        );
+
+        const style = getComputedStyle(document.documentElement);
+        const initialColor =
+          style.getPropertyValue("--text-color").trim() || "#00ff41";
+
+        const material = new THREE.PointsMaterial({
+          color: initialColor,
+          size: 1.5,
+          transparent: true,
+          opacity: 0.6,
+          sizeAttenuation: true,
         });
+
+        cloud = new THREE.Points(geometry, material);
+        scene.add(cloud);
+
+        window.addEventListener("resize", () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+      };
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        if (cloud) {
+          cloud.rotation.y += 0.0004;
+          cloud.rotation.x += 0.0001;
+          const time = Date.now() * 0.0008;
+          cloud.material.opacity = 0.4 + Math.sin(time) * 0.15;
+        }
+        renderer.render(scene, camera);
+      };
+
+      window.onload = initThree;
     </script>
-</body>
+  </body>
 </html>
